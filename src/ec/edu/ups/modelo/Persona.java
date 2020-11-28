@@ -5,13 +5,15 @@
  */
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
  * @author ariel
  */
-public class Persona {
+public class Persona implements Serializable{
     
     private int codigo;
     private String nombre;
@@ -23,6 +25,10 @@ public class Persona {
     private String estadoCivil;
 
     public Persona() {
+    }
+
+    public Persona(String cedula) {
+        this.cedula = cedula;
     }
 
     public Persona(int codigo, String nombre, String apellido, String cedula, String direccion, String Genero, LocalDate fechaDeNacimineto, String estadoCivil) {
@@ -102,8 +108,8 @@ public class Persona {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + this.codigo;
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.cedula);
         return hash;
     }
 
@@ -119,11 +125,12 @@ public class Persona {
             return false;
         }
         final Persona other = (Persona) obj;
-        if (this.codigo != other.codigo) {
+        if (!Objects.equals(this.cedula, other.cedula)) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {
